@@ -1,0 +1,440 @@
+	<div class="row-fluid">
+		<div class="span12">
+			<fieldset>
+				<legend style="margin-bottom: 8px;">批核資料</legend>
+	
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group" id="approval_interest_method-control">
+							<label class="control-label" for="approval_interest_method">計息方法</label>
+							<div class="controls">
+								<select class="" id="approval_interest_method" name="approval_interest_method" style="width: 220px;" disabled>
+																											<option value="" >&nbsp;</option>
+																		<option value="int_prin" selected>息隨本減</option>
+																		<option value="int_first" >先息後本</option>
+																		<option value="rule78" >78法則</option>
+																	</select>
+								<input id="approval_interest_method_hd" name="approval_interest_method" type="hidden" value="int_prin" />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="approval_repayment_cycle-control">
+							<label class="control-label" for="approval_repayment_cycle">還款週期</label>
+							<div class="controls">
+								<select class="" id="approval_repayment_cycle" name="approval_repayment_cycle" style="width: 220px;" disabled>
+																											<option value="" >&nbsp;</option>
+																		<option value="month" >每月</option>
+																		<option value="month_twice" >每月兩次</option>
+																		<option value="biweekly" >每兩星期</option>
+																		<option value="day" selected>日數</option>
+																	</select>
+								<span class="" id="repayment_cycle_day_placeholder"><input class="number" data-decimal-place="0" id="approval_repayment_cycle_day" name="approval_repayment_cycle_day" type="text" value="15" style="width: 50px;" readonly />&nbsp;日</span>
+								<span class="hide" id="repayment_cycle_day_month_end_placeholder"><label class="checkbox inline"><input id="approval_repayment_cycle_day_month_end" name="approval_repayment_cycle_day_month_end" type="checkbox" value="1"  disabled />&nbsp;月底</label></span>
+								<input id="repayment_cycle_hd" name="approval_repayment_cycle" type="hidden" value="day" />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group hide" id="approval_rate_type-control">
+							<label class="control-label" for="approval_rate_type">利率類別</label>
+							<div class="controls">
+								<select class="required" id="approval_rate_type" name="approval_rate_type" style="width: 220px;" disabled>
+																											<option value="" >&nbsp;</option>
+																		<option value="fixed" selected>固定利率</option>
+																		<option value="vary" >浮動利率</option>
+																	</select>
+								<input id="approval_rate_type_hd" name="approval_rate_type" type="hidden" value="fixed" />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group" id="approval_loan_amount-control">
+									<label class="control-label" for="approval_loan_amount">貸款金額</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on">$</span><input class="number" data-decimal-place="2" id="approval_loan_amount" name="approval_loan_amount" type="text" value="10,000.00" style="width: 90px;" readonly />
+										</div>
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+							<div class="span6">
+								<div class="control-group" id="approval_installment-control">
+									<label class="control-label" for="approval_installment">還款總期數</label>
+									<div class="controls">
+										<input class="number" min="1" data-decimal-place="0" id="approval_installment" name="approval_installment" type="text" maxlength="3" value="4" style="width: 117px;" readonly />
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row-fluid hide" id="approval_rate_type_vary">
+							<div class="span9">
+								<div class="control-group" id="approval_prime_rate_vary-control">
+									<label class="control-label" for="approval_prime_rate_vary">浮息利率</label>
+									<div class="controls">
+										<select class="" id="approval_prime_rate_id" name="approval_prime_rate_id" style="width: 70px;" disabled>
+																																</select>
+										<input id="approval_prime_rate_id_hd" name="approval_prime_rate_id" type="hidden" value="0" />
+										<div class="input-prepend input-append">
+											<input id="approval_prime_rate" name="approval_prime_rate" type="text" value="0.000" style="width: 50px; -webkit-border-radius: 2px 0 0 2px; -moz-border-radius: 2px 0 0 2px; border-radius: 2px 0 0 2px;" readonly /><span class="add-on">+/-</span><input class="number rate" data-decimal-place="3" id="approval_prime_rate_vary" name="approval_prime_rate_vary" type="text" value="0.000" style="width: 50px;" readonly /><span class="add-on">%</span>
+										</div>
+										<input id="prime_rate_log_id" name="prime_rate_log_id" type="hidden" value="0" />
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group" id="approval_flat_rate-control">
+									<label class="control-label" for="approval_flat_rate">期平息</label>
+									<div class="controls">
+										<div class="input-append">
+											<input class="number rate" min="0" data-decimal-place="4" id="approval_flat_rate" name="approval_flat_rate" type="text" value="1.2200" style="width: 90px;" readonly /><span class="add-on">%</span>
+										</div>
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+							<div class="span6">
+								<div class="control-group" id="approval_interest_rate-control">
+									<label class="control-label" for="approval_interest_rate">實際年利率</label>
+									<div class="controls">
+										<div class="input-append">
+											<input class="number rate maxint_rate" min="0" data-decimal-place="3" id="approval_interest_rate" name="approval_interest_rate" type="text" value="47.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+										</div>
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<div class="offset6 span6">
+								<div class="control-group" id="approval_handling_fee_interest_rate-control">
+									<label class="control-label" for="approval_handling_fee_interest_rate"><span class="interest_rate_label">實際年利率</span><br />(含預付利息)</label>
+									<div class="controls">
+										<div class="input-append">
+											<input class="number rate maxint_rate" min="0" data-decimal-place="3" id="approval_handling_fee_interest_rate" name="approval_handling_fee_interest_rate" type="text" value="47.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+										</div>
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<fieldset>
+								<legend style="margin-bottom: 8px;">罰款設定</legend>
+								
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="control-group" id="approval_penalty_rate-control">
+											<label class="control-label" for="approval_penalty_rate">過期罰息</label>
+											<div class="controls">
+												<div class="input-append">
+													<input class="number rate" data-decimal-place="3" id="approval_penalty_rate" name="approval_penalty_rate" type="text" value="47.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div class="control-group" id="approval_penalty_amount-control">
+											<label class="control-label" for="approval_penalty_amount">過期罰款</label>
+											<div class="controls">
+												<div class="input-prepend">
+													<span class="add-on">$</span><input class="number" data-decimal-place="2" id="approval_penalty_amount" name="approval_penalty_amount" type="text" value="0.00" style="width: 90px;" readonly />
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="control-group" id="approval_handling_fee_percentage-control">
+											<label class="control-label" for="approval_handling_fee_percentage">預付利息</label>
+											<div class="controls">
+												<div class="input-append">
+													<input class="number rate" data-decimal-place="3" id="approval_handling_fee_percentage" name="approval_handling_fee_percentage" type="text" value="0.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div class="control-group" id="approval_handling_fee-control">
+											<label class="control-label" for="approval_handling_fee">預付利息</label>
+											<div class="controls">
+												<div class="input-prepend">
+													<span class="add-on">$</span><input class="number maxint" data-decimal-place="2" id="approval_handling_fee" name="approval_handling_fee" type="text" value="0.00" style="width: 90px;" readonly />
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="control-group" id="approval_early_settle_lock_period-control">
+											<label class="control-label" for="approval_early_settle_lock_period">提早清還鎖期(月)</label>
+											<div class="controls">
+												<input class="number" min="0" data-decimal-place="0" id="approval_early_settle_lock_period" name="approval_early_settle_lock_period" type="text" maxlength="3" value="0" style="width: 117px;" readonly />
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div class="control-group" id="approval_early_settle_fee_percentage-control">
+											<label class="control-label" for="approval_early_settle_fee_percentage">鎖期內行政費</label>
+											<div class="controls">
+												<div class="input-append">
+													<input class="number rate" data-decimal-place="3" id="approval_early_settle_fee_percentage" name="approval_early_settle_fee_percentage" type="text" value="0.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="control-group" id="approval_late_drawdown_fee_percentage-control">
+											<label class="control-label" for="approval_late_drawdown_fee_percentage">延遲提款(合約)</label>
+											<div class="controls">
+												<div class="input-append">
+													<input class="number rate" min="0" data-decimal-place="3" id="approval_late_drawdown_fee_percentage" name="approval_late_drawdown_fee_percentage" type="text" value="1.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+												</div>&nbsp;&nbsp;/
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div class="control-group" id="approval_late_drawdown_fee-control">
+											<label class="control-label" for="approval_late_drawdown_fee">延遲提款(合約)</label>
+											<div class="controls">
+												<div class="input-prepend">
+													<span class="add-on">$</span><input class="number" data-decimal-place="2" id="approval_late_drawdown_fee" name="approval_late_drawdown_fee" type="text" value="6,000.00" style="width: 90px;" readonly />
+												</div>
+												<span class="help-inline"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div><br /><br />
+						
+												<input type="hidden" id="reloan_count" name="reloan_count" value="0" />
+					</div>
+					
+					<div class="span6">
+						<div class="control-group" id="dsr-control">
+														<label class="control-label" for="dsr" style="width: 170px;"><strong>DSR (供款與收入比率)</strong> <span rel="tooltip" title="每月供款和總支出總和，除以總收入"><i class="icon-info-sign"></i></span></label>
+							<div class="controls">
+								<strong id="dsr_label" style="font-size: 180%; line-height: 1.2;">0.00%</strong>
+								<input type="hidden" id="dsr" name="dsr" value="0.00" />
+								<input type="hidden" id="total_ie_income_amount" name="total_ie_income_amount" value="0.00" />
+								<input type="hidden" id="total_ie_expense_amount" name="total_ie_expense_amount" value="0.00" />
+							</div>
+						</div><br />
+						
+						<div class="control-group" id="approval_staff-control">
+							<label class="control-label" for="approval_staff">批核員工</label>
+							<div class="controls">
+								<input class="" id="approval_staff" name="approval_staff" type="text" value="CAT" style="width: 206px;" readonly />
+								<input id="approval_staff_id" name="approval_staff_id" type="hidden" value="11" />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="approval_date-control">
+							<label class="control-label" for="approval_date">批核日期</label>
+							<div class="controls">
+								<input class="mydate calendar" id="approval_date" name="approval_date" type="text" maxlength="10" value="2024-01-26" placeholder="YYYY-MM-DD" style="width: 206px;" readonly />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="payout_date-control">
+							<label class="control-label" for="payout_date">放款日期</label>
+							<div class="controls">
+								<input class="mydate calendar" id="payout_date" name="payout_date" type="text" maxlength="10" value="2024-01-26" placeholder="YYYY-MM-DD" style="width: 206px;" readonly />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="loan_date-control">
+							<label class="control-label" for="loan_date">起息日期</label>
+							<div class="controls">
+								<input class="mydate calendar" id="loan_date" name="loan_date" type="text" maxlength="10" value="2024-01-26" placeholder="YYYY-MM-DD" style="width: 206px;" readonly />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="first_repay_date-control">
+							<label class="control-label" for="first_repay_date">首期還款日</label>
+							<div class="controls">
+								<input class="mydate calendar" id="first_repay_date" name="first_repay_date" type="text" maxlength="10" value="2024-02-10" placeholder="YYYY-MM-DD" style="width: 206px;" readonly />
+								<span class="help-inline"></span>
+							</div>
+						</div><br />
+						
+						<div class="control-group" id="extended_interest_day-control">
+							<label class="control-label" for="extended_interest_day">延期日數</label>
+							<div class="controls">
+								<input class="number" data-decimal-place="0" id="extended_interest_day" name="extended_interest_day" type="text" value="0" style="width: 117px;" readonly />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="extended_interest-control">
+							<label class="control-label" for="extended_interest">延期利息</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="number" data-decimal-place="2" id="extended_interest" name="extended_interest" type="text" value="0.00" style="width: 90px;" readonly />
+								</div>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="first_repay_amount-control">
+							<label class="control-label" for="first_repay_amount">首期供款</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="" id="first_repay_amount" name="first_repay_amount" type="text" value="2,622.00" style="width: 90px;" readonly />
+								</div>
+							</div>
+						</div>
+						
+						<div class="control-group" id="installment_amount-control">
+							<label class="control-label" for="installment_amount">每期供款</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="" id="installment_amount" name="installment_amount" type="text" value="2,622.00" style="width: 90px;" readonly />
+								</div>
+							</div>
+						</div>
+						
+						<div class="control-group" id="total_interest-control">
+							<label class="control-label" for="total_interest">總利息</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="" id="total_interest" name="total_interest" type="text" value="488.00" style="width: 90px;" readonly />
+								</div>
+							</div>
+						</div>
+						
+						<div class="control-group" id="total_repay_amount-control">
+							<label class="control-label" for="total_repay_amount">總供款</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="" id="total_repay_amount" name="total_repay_amount" type="text" value="10,488.00" style="width: 90px;" readonly />
+								</div>
+							</div>
+						</div><br />
+						
+						<div class="control-group" id="approval_maximum_interest_rate-control">
+							<label class="control-label" for="approval_maximum_interest_rate">利息上限</label>
+							<div class="controls">
+								<div class="input-append">
+									<input class="number rate maxint_rate" data-decimal-place="3" id="approval_maximum_interest_rate" name="approval_maximum_interest_rate" type="text" value="48.000" style="width: 90px;" readonly /><span class="add-on">%</span>
+								</div>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="approval_maxint_max_total_interest-control">
+							<label class="control-label" for="approval_maxint_max_total_interest">最高可收利息</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="number maxint" data-decimal-place="2" id="approval_maxint_max_total_interest" name="approval_maxint_max_total_interest" type="text" value="499.00" style="width: 90px;" readonly />
+								</div>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="approval_maxint_total_interest-control">
+							<label class="control-label" for="approval_maxint_total_interest">貸款總利息</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="number maxint" data-decimal-place="2" id="approval_maxint_total_interest" name="approval_maxint_total_interest" type="text" value="488.00" style="width: 90px;" readonly />
+								</div>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" id="approval_maxint_extra_interest_remain-control">
+							<label class="control-label" for="approval_maxint_extra_interest_remain">剩餘可收</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<span class="add-on">$</span><input class="number maxint" data-decimal-place="2" id="approval_maxint_extra_interest_remain" name="approval_maxint_extra_interest_remain" type="text" value="11.00" style="width: 90px;" readonly />
+								</div>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+												<br />
+						<div class="control-group" id="repay_schedule-control">
+							<label class="control-label" for="repay_schedule">還款表</label>
+							<div class="controls">
+								<button class="btn" type="button"  onClick="new_window('print_docs_loan_integrated.php?type=view&id=125&init=repay_table', 750, 800, 'print_docs_loan_approval');"  title="列印"><i class="icon-print"></i> 列印</button>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+											</div>
+				</div><br />
+				
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group" id="solicitor_id-control">
+							<label class="control-label" for="solicitor_id">洽商及完成地點</label>
+							<div class="controls">
+								<select class="required" id="solicitor_id" name="solicitor_id" style="width: 220px;" disabled>
+									<optgroup label="店舖">
+																														<option value="-1" selected>佐敦</option>
+																			</optgroup>
+									<optgroup label="律師樓">
+																														<option value="1" >A 律師樓</option>
+																			</optgroup>
+								</select>
+								<input id="solicitor_id_hd" name="solicitor_id" type="hidden" value="-1" />
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group" id="actual_loan_amount-control">
+									<label class="control-label" for="actual_loan_amount">客戶實收金額</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on">$</span><input class="highlight" id="actual_loan_amount" name="actual_loan_amount" type="text" value="10,000.00" style="width: 90px;" readonly />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="span6">
+								<div class="control-group" id="approval_remark-control">
+									<label class="control-label" for="approval_remark">批核備註</label>
+									<div class="controls">
+										<textarea class="" id="approval_remark" name="approval_remark" rows="4" style="width: 416px;" readonly></textarea>
+										<span class="help-inline"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	
