@@ -97,19 +97,21 @@ func main() {
 
 		// Get the value of the "id" attribute of the <input> element
 		inputID, exists := input.Attr("id")
-		var inputValue string
-		inputValue = input.AttrOr("value", "")
 
-		selectedOptions := input.Find("option[selected]")
+		// var inputValue string
+		// inputValue = input.AttrOr("value", "")
 
-		selectedOptions.Each(func(i int, d *goquery.Selection) {
-			// Get the text content of the <option> element
-			inputValue = d.Text()
-			//fmt.Println("Selected Option:", inputValue)
-		})
+		// selectedOptions := input.Find("option[selected]")
+
+		// selectedOptions.Each(func(i int, d *goquery.Selection) {
+		// 	// Get the text content of the <option> element
+		// 	inputValue = d.Text()
+		// 	//fmt.Println("Selected Option:", inputValue)
+		// })
 
 		if exists {
-			fmt.Printf("Label: %s, Input ID: %s, Input Value: %s\n", s.Text(), inputID, inputValue)
+			//fmt.Printf("Label: %s, Input ID: %s, Input Value: %s\n", s.Text(), inputID, inputValue)
+			fmt.Printf("%s\n", inputID)
 		}
 	})
 
