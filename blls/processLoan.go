@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"migration/models"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -20,62 +21,56 @@ func setFieldValue(ogp *models.Application, field string, value string) {
 	}
 }
 
-func GetLoan(loanId string, login_branch string, login_user string, sessionId string, user_lang string, domain string) {
-	// url := "https://" + domain + "/nobility_asset_limited/~/loan_info.php?id=" + loanId
+func GetLoan(loanId int, login_branch string, login_user string, sessionId string, user_lang string, domain string) {
+	url := fmt.Sprint("https://"+domain+"/nobility_asset_limited/~/loan_info.php?id=", loanId)
 
-	// // Create a new HTTP GET request
-	// req, err := http.NewRequest("GET", url, nil)
-	// if err != nil {
-	// 	fmt.Println("Error creating request:", err)
-	// 	return
-	// }
-
-	// // Set multiple cookies if needed
-
-	// cookies := []*http.Cookie{
-	// 	{Name: "PHPSESSID", Value: sessionId},
-	// 	{Name: "login_branch", Value: login_branch},
-	// 	{Name: "login_user", Value: login_user},
-	// 	{Name: "user_lang", Value: user_lang},
-	// }
-
-	// for _, cookie := range cookies {
-	// 	req.AddCookie(cookie)
-	// }
-
-	// // Create an HTTP client
-	// client := &http.Client{}
-
-	// // Send the request
-	// resp, err := client.Do(req)
-	// if err != nil {
-	// 	fmt.Println("Error sending request:", err)
-	// 	return
-	// }
-	// defer resp.Body.Close()
-
-	// // Print the response status code
-	// fmt.Println("Response Status:", resp.Status)
-
-	// // Read and print the response body
-	// body, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	fmt.Println("Error reading response body:", err)
-	// 	return
-	// }
-	// fmt.Println("Response Body:", string(body))
-	// body1, err := html.Parse(strings.NewReader(string(body)))
-
-	// if body != nil {
-	// 	// Print the content of the head element
-	// 	printNodeContent(body1)
-	// }
-
-	//htmlContent := string(string(body))
-	content, err := ioutil.ReadFile("example_response/loan_info.html")
+	// Create a new HTTP GET request
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
+		fmt.Println("Error creating request:", err)
+		return
 	}
-	Process(string(content))
+
+	// Set multiple cookies if needed
+
+	cookies := []*http.Cookie{
+		{Name: "PHPSESSID", Value: sessionId},
+		{Name: "login_branch", Value: login_branch},
+		{Name: "login_user", Value: login_user},
+		{Name: "user_lang", Value: user_lang},
+	}
+
+	for _, cookie := range cookies {
+		req.AddCookie(cookie)
+	}
+
+	// Create an HTTP client
+	client := &http.Client{}
+
+	// Send the request
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error sending request:", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	// Print the response status code
+	fmt.Println("Response Status:", resp.Status)
+
+	// Read and print the response body
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error reading response body:", err)
+		return
+	}
+	fmt.Println("Response Body:", string(respBody))
+
+	htmlContent := string(string(respBody))
+	// content, err := ioutil.ReadFile("example_response/loan_info.html")
+	// if err != nil {
+	// }
+	Process(string(htmlContent))
 }
 
 func Process(htmlContent string) {
